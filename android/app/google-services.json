@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "972588949882",
+    "project_id": "emailauth-1ac5b",
+    "storage_bucket": "emailauth-1ac5b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972588949882:android:138742e02a37994f6df6c3",
+        "android_client_info": {
+          "package_name": "com.example.authentication_page"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWZPay-70M4yjkUjasNfy-y9-xloigWFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972588949882:android:6f2cd8ae1f9c70f76df6c3",
+        "android_client_info": {
+          "package_name": "com.example.google_login"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWZPay-70M4yjkUjasNfy-y9-xloigWFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
