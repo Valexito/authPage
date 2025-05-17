@@ -1,22 +1,20 @@
-import 'package:authentication_page/components/my_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:authentication_page/components/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:authentication_page/components/my_button.dart';
 import 'package:authentication_page/components/my_textfield.dart';
 import 'package:authentication_page/components/square_tile.dart';
 
-class LoginPage extends StatelessWidget {
-   LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  
-  //Method to sing in
-  void signUserIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text, 
-      password: passwordController.text,
-    );
-  }
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthService authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +77,13 @@ class LoginPage extends StatelessWidget {
 
                 // Sign In Button
                 MyButton(
-                  onTap: signUserIn,
+                  onTap: () {
+                    authService.signInUser(
+                      context,
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
+                    );
+                  },
                 ),
 
                 const SizedBox(height: 30),
