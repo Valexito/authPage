@@ -113,8 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                  Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Google button
-                  SquareTile(imagePath: 'lib/images/google.png'),
+                    
+                    // Google button con tap
+                    GestureDetector(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      child: SquareTile(imagePath: 'lib/images/google.png'),
+                    ),
 
                   const SizedBox(width: 15),
                   //Apple
