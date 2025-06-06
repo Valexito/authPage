@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:authentication_page/components/my_button.dart';
 import 'package:authentication_page/components/my_textfield.dart';
 import 'package:authentication_page/components/square_tile.dart';
+import 'package:authentication_page/components/forgot_password_dialog.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final VoidCallback showRegisterPage;
+
+  const LoginPage({Key? key, required this.showRegisterPage}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -35,39 +38,46 @@ class _LoginPageState extends State<LoginPage> {
                 // Welcome back
                 Text(
                   'Welcome back!',
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 24,
-                  ),
+                  style: TextStyle(color: Colors.grey[700], fontSize: 24),
                 ),
 
                 const SizedBox(height: 25),
 
                 // Username TextField
                 MyTextField(
-                  controller: emailController, 
-                  hintText: 'Email', 
-                  obscureText: false),
+                  controller: emailController,
+                  hintText: 'Email',
+                  obscureText: false,
+                ),
 
                 const SizedBox(height: 10),
 
                 // Password TextField
-               MyTextField(
-                controller: passwordController, 
-                hintText: 'Password', 
-                obscureText: true),
+                MyTextField(
+                  controller: passwordController,
+                  hintText: 'Password',
+                  obscureText: true,
+                ),
 
                 const SizedBox(height: 10),
 
                 // Forgot Password?
-                const Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 25),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children:  [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.blue),
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => const ForgotPasswordDialog(),
+                          );
+                        },
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.blue),
+                        ),
                       ),
                     ],
                   ),
@@ -90,9 +100,9 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Or continue with
                 const Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 25),
+                  padding: EdgeInsets.symmetric(horizontal: 25),
                   child: Row(
-                    children:  [
+                    children: [
                       Expanded(
                         child: Divider(thickness: 1, color: Colors.grey),
                       ),
@@ -110,39 +120,43 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 30),
 
                 // Google + Apple Sign In Buttons (placeholders)
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    
                     // Google button con tap
                     GestureDetector(
                       onTap: () => AuthService().signInWithGoogle(),
                       child: SquareTile(imagePath: 'lib/images/google.png'),
                     ),
 
-                  const SizedBox(width: 15),
-                  //Apple
-                  SquareTile(imagePath: 'lib/images/apple.png')
+                    const SizedBox(width: 15),
+                    //Apple
+                    SquareTile(imagePath: 'lib/images/apple.png'),
                   ],
                 ),
 
                 const SizedBox(height: 30),
 
                 // Not a member? Register now
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not a member?'),
-                    SizedBox(width: 4),
-                    Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    const Text('Not a member?'),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap:
+                          widget
+                              .showRegisterPage, // esto lo pasas desde AuthPage
+                      child: const Text(
+                        'Register now',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
